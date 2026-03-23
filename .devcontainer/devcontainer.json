@@ -1,0 +1,22 @@
+{
+  "name": "web-app-intro-sandbox-2026",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "marp-team.marp-vscode",
+        "anthropic.claude-code",
+        "ms-vscode.live-server",
+        "MS-CEINTL.vscode-language-pack-ja",
+        "GitHub.copilot-chat",
+        "MS-vsliveshare.vsliveshare"
+      ]
+    }
+  },
+  "postCreateCommand": "pip install -r requirements.txt --break-system-packages"
+}

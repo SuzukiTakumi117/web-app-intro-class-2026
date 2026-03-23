@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch API POST デモ</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      color: #2563eb;
+    }
+    h2 {
+      color: #1e40af;
+    }
+    .input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 10px 12px;
+      border: 2px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+    button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1d4ed8;
+    }
+    .btn-green {
+      background-color: #16a34a;
+    }
+    .btn-green:hover {
+      background-color: #15803d;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 16px;
+      background-color: white;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      min-height: 100px;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 14px;
+    }
+    .info {
+      background-color: #dbeafe;
+      border-left: 4px solid #2563eb;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      border-radius: 0 8px 8px 0;
+    }
+    .section {
+      margin-bottom: 24px;
+      padding: 16px;
+      background-color: white;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fetch API POST デモ</h1>
+
+  <div class="info">
+    <p><strong>このデモの目的:</strong> JavaScriptからPOSTリクエストを送信し、サーバーに新しいTODOを追加します。</p>
+    <p>開発者ツールの <strong>Console</strong> タブと <strong>Network</strong> タブを開いてから操作してください。</p>
+  </div>
+
+  <div class="section">
+    <h2>TODO を追加する（POST）</h2>
+    <div class="input-group">
+      <input type="text" id="todoInput" placeholder="新しいTODOを入力...">
+      <button onclick="addTodo()">追加（POST）</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>TODO 一覧を取得する（GET）</h2>
+    <button class="btn-green" onclick="getTodos()">TODOを取得（GET）</button>
+  </div>
+
+  <h2>結果:</h2>
+  <div id="result">ボタンを押すとここに結果が表示されます</div>
+
+  <script>
+    // =====================================================
+    // Fetch API を使った POST リクエストのデモ
+    // =====================================================
+
+    const API_URL = "http://localhost:8000";
+
+    // ----- GET: TODO一覧を取得 -----
+    async function getTodos() {
+      console.log("--- GET /todos を実行します ---");
+      try {
+        const response = await fetch(`${API_URL}/todos`);
+        const data = await response.json();
+        console.log("取得したTODO一覧:", data);
+        document.getElementById("result").textContent =
+          "GET /todos のレスポンス:\n" + JSON.stringify(data, null, 2);
+      } catch (error) {
+        console.error("GETエラー:", error);
+        document.getElementById("result").textContent = "エラー: " + error.message;
+      }
+    }
+
+    // ----- POST: 新しいTODOを追加 -----
+    async function addTodo() {
+      const input = document.getElementById("todoInput");
+      const title = input.value.trim();
+
+      if (!title) {
+        alert("TODOを入力してください");
+        return;
+      }
+
+      console.log("--- POST /todos を実行します ---");
+      console.log("送信するデータ:", { title: title });
+
+      try {
+        // Step 1: POSTリクエストの設定
+        //   method: HTTPメソッドを指定
+        //   headers: 送信するデータの形式を宣言
+        //   body: 送信するデータ（JSON文字列に変換）
+        const requestBody = { title: title };
+        console.log("Step 1: リクエスト設定");
+        console.log("  method: POST");
+        console.log("  Content-Type: application/json");
+        console.log("  body (JSオブジェクト):", requestBody);
+        console.log("  body (JSON文字列):", JSON.stringify(requestBody));
+
+        // Step 2: fetch() でPOSTリクエストを送信
+        console.log("Step 2: fetch() でリクエスト送信...");
+        const response = await fetch(`${API_URL}/todos`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(requestBody)
+        });
+
+        // Step 3: レスポンスを確認
+        console.log("Step 3: レスポンス受信");
+        console.log("  ステータスコード:", response.status);
+        const data = await response.json();
+        console.log("  レスポンスデータ:", data);
+        console.log("  サーバーが付与したID:", data.id);
+
+        // Step 4: 画面に表示
+        document.getElementById("result").textContent =
+          "POST /todos のレスポンス:\n" + JSON.stringify(data, null, 2);
+
+        // 入力欄をクリア
+        input.value = "";
+
+      } catch (error) {
+        console.error("POSTエラー:", error);
+        document.getElementById("result").textContent = "エラー: " + error.message;
+      }
+    }
+
+    // Enterキーでも追加できるようにする
+    document.getElementById("todoInput").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        addTodo();
+      }
+    });
+  </script>
+</body>
+</html>
