@@ -12,7 +12,8 @@
         "ms-vscode.live-server",
         "MS-CEINTL.vscode-language-pack-ja",
         "GitHub.copilot-chat",
-        "MS-vsliveshare.vsliveshare"
+        "MS-vsliveshare.vsliveshare",
+        "marp-team.marp-vscode"
       ]
     }
   },
