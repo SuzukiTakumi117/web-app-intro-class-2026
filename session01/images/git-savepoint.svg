@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" font-family="'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans CJK JP', sans-serif">
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect x="80" y="80" width="200" height="80" rx="10" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+  <text x="180" y="130" text-anchor="middle" fill="#dbeafe" font-size="28" font-weight="bold">セーブ1</text>
+
+  <rect x="360" y="80" width="200" height="80" rx="10" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+  <text x="460" y="130" text-anchor="middle" fill="#dbeafe" font-size="28" font-weight="bold">セーブ2</text>
+
+  <rect x="640" y="80" width="200" height="80" rx="10" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+  <text x="740" y="130" text-anchor="middle" fill="#dbeafe" font-size="28" font-weight="bold">セーブ3</text>
+
+  <rect x="920" y="80" width="200" height="80" rx="10" fill="#064e3b" stroke="#10b981" stroke-width="2"/>
+  <text x="1020" y="118" text-anchor="middle" fill="#a7f3d0" font-size="24" font-weight="bold">セーブ4</text>
+  <text x="1020" y="146" text-anchor="middle" fill="#a7f3d0" font-size="20">（現在）</text>
+
+  <line x1="282" y1="120" x2="356" y2="120" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow-blue)"/>
+  <line x1="562" y1="120" x2="636" y2="120" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow-blue)"/>
+  <line x1="842" y1="120" x2="916" y2="120" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow-blue)"/>
+
+  <path d="M 180 162 C 180 270, 740 270, 740 162" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="10 6" marker-end="url(#arrow-slate)"/>
+  <text x="460" y="312" text-anchor="middle" fill="#93c5fd" font-size="22">いつでもここに戻れる</text>
+</svg>

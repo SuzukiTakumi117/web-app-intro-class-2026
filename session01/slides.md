@@ -23,9 +23,6 @@ style: |
   table {
     font-size: 22px;
   }
-  div.mermaid {
-    all: unset;
-  }
 ---
 
 # 第1回: 開発環境の準備とインターネットの仕組み
@@ -76,7 +73,7 @@ TODOアプリの機能:
 
 ## TODOアプリの全体アーキテクチャ
 
-![height:550](../overview.png)
+![height:550](images/overview.svg)
 
 ---
 
@@ -160,11 +157,7 @@ Webアプリは **2つの場所** でコードが動いています。
 
 ゲームのセーブに例えると:
 
-<div class="mermaid">
-graph LR
-    S1["セーブ1"] --> S2["セーブ2"] --> S3["セーブ3"] --> S4["セーブ4（現在）"]
-    S1 -.->|"いつでもここに戻れる"| S3
-</div>
+![h:200](images/git-savepoint.svg)
 
 Gitの用語:
 | ゲーム | Git | 意味 |
@@ -179,19 +172,7 @@ Gitの用語:
 
 **GitHub** = Gitのデータをインターネット上に保存・共有するサービス
 
-<div class="mermaid">
-graph LR
-    subgraph Local["自分のPC（ローカル）"]
-        Git["Gitで管理"]
-    end
-    subgraph Remote["GitHub（クラウド・リモート）"]
-        Backup["バックアップ"]
-        Share["他の人と共有"]
-        Visibility["公開・非公開を選べる"]
-    end
-    Local -->|push| Remote
-    Remote -->|pull| Local
-</div>
+![h:340](images/git-github.svg)
 
 - **Git**: ツールそのもの（ローカルで動く）
 - **GitHub**: Gitのデータを置くWebサービス（クラウド）
@@ -418,10 +399,7 @@ git push
 ```
 
 流れ:
-<div class="mermaid">
-graph LR
-    A["ファイルを編集"] --> B["git add（選ぶ）"] --> C["git commit（記録する）"] --> D["git push（共有する）"]
-</div>
+![h:80](images/git-flow.svg)
 
 コミットメッセージには **「何をしたか」** を書きます。
 例: `"hello.txtを作成"`
@@ -507,15 +485,7 @@ git push
 
 **DNS**（Domain Name System）= ドメイン名をIPアドレスに変換する仕組み
 
-<div class="mermaid">
-sequenceDiagram
-    participant B as ブラウザ
-    participant D as DNSサーバー（電話帳）
-    participant G as Googleサーバー
-    B->>D: google.comのIPアドレスは？
-    D-->>B: 142.250.196.110 だよ
-    B->>G: 142.250.196.110 に接続
-</div>
+![h:340](images/dns-lookup.svg)
 
 なぜ必要？: `142.250.196.110` を覚えるのは大変。`google.com` なら覚えやすい。
 
@@ -531,12 +501,7 @@ sequenceDiagram
 
 そこで、**小さな「パケット」に分割**して送ります:
 
-<div class="mermaid">
-graph LR
-    Original["元のデータ<br>ABCDEFGHIJKLMNOP"] -->|分割| Packets["パケット1: ABCD<br>パケット2: EFGH<br>パケット3: IJKL<br>パケット4: MNOP"]
-    Packets -->|送信| Dest["受信側"]
-    Dest -->|組み立て| Reassembled["ABCDEFGHIJKLMNOP"]
-</div>
+![h:240](images/packet.svg)
 
 パケット3だけエラーになっても、パケット3だけ再送すればOK。
 
@@ -544,16 +509,7 @@ graph LR
 
 ## まとめ: インターネットの仕組み
 
-<div class="mermaid">
-sequenceDiagram
-    participant PC as あなたのPC
-    participant DNS as DNSサーバー
-    participant Web as Webサーバー（例: google.com）
-    PC->>DNS: 1. DNSに問い合わせ
-    DNS-->>PC: 2. IPアドレスを取得
-    PC->>Web: 3. パケットで通信（IPアドレス宛）
-    Web-->>PC: 3. パケットで通信（IPアドレス宛）
-</div>
+![h:520](images/internet-summary.svg)
 
 ---
 
@@ -615,15 +571,7 @@ Webの通信は **レストラン** に例えるとわかりやすい:
 
 Webの通信は常に **リクエスト（要求）** と **レスポンス（応答）** のペアです。
 
-<div class="mermaid">
-sequenceDiagram
-    participant C as クライアント（ブラウザ）
-    participant S as サーバー
-    C->>S: リクエスト（要求）
-    Note right of S: 要求を処理
-    S-->>C: レスポンス（応答）
-    Note left of C: 画面に表示
-</div>
+![h:340](images/request-response.svg)
 
 ---
 
@@ -840,8 +788,3 @@ HTMLタグを学び、TODOアプリの画面を作り始めます。
    - 例: `https://github.com/ユーザー名/リポジトリ名/blob/main/hello.txt`
 
 お疲れ様でした！
-
-<script type="module">
-import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-mermaid.initialize({ startOnLoad: true, theme: 'dark' });
-</script>

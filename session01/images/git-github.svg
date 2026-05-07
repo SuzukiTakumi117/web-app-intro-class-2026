@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" font-family="'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans CJK JP', sans-serif">
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/>
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <rect x="40" y="40" width="440" height="420" rx="14" fill="#1e3a8a" fill-opacity="0.25" stroke="#60a5fa" stroke-width="2.5" stroke-dasharray="8 6"/>
+  <text x="260" y="90" text-anchor="middle" fill="#93c5fd" font-size="26" font-weight="bold">自分のPC（ローカル）</text>
+
+  <rect x="120" y="220" width="280" height="100" rx="10" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+  <text x="260" y="280" text-anchor="middle" fill="#dbeafe" font-size="28" font-weight="bold">Gitで管理</text>
+
+  <rect x="720" y="40" width="440" height="420" rx="14" fill="#155e75" fill-opacity="0.25" stroke="#06b6d4" stroke-width="2.5" stroke-dasharray="8 6"/>
+  <text x="940" y="90" text-anchor="middle" fill="#67e8f9" font-size="26" font-weight="bold">GitHub（クラウド・リモート）</text>
+
+  <rect x="780" y="130" width="320" height="90" rx="10" fill="#155e75" stroke="#06b6d4" stroke-width="2"/>
+  <text x="940" y="183" text-anchor="middle" fill="#cffafe" font-size="24" font-weight="bold">バックアップ</text>
+
+  <rect x="780" y="245" width="320" height="90" rx="10" fill="#155e75" stroke="#06b6d4" stroke-width="2"/>
+  <text x="940" y="298" text-anchor="middle" fill="#cffafe" font-size="24" font-weight="bold">他の人と共有</text>
+
+  <rect x="780" y="360" width="320" height="90" rx="10" fill="#155e75" stroke="#06b6d4" stroke-width="2"/>
+  <text x="940" y="413" text-anchor="middle" fill="#cffafe" font-size="24" font-weight="bold">公開・非公開を選べる</text>
+
+  <line x1="482" y1="210" x2="718" y2="210" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow-blue)"/>
+  <text x="600" y="198" text-anchor="middle" fill="#93c5fd" font-size="24" font-weight="bold">push</text>
+
+  <line x1="718" y1="290" x2="482" y2="290" stroke="#34d399" stroke-width="3" marker-end="url(#arrow-emerald)"/>
+  <text x="600" y="318" text-anchor="middle" fill="#a7f3d0" font-size="24" font-weight="bold">pull</text>
+</svg>
