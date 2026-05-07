@@ -483,7 +483,7 @@ showTodos(todos);
 
 ブラウザはHTMLを読み込むと、内部的に「ツリー構造」のデータに変換します。
 
-![height:440](images/dom-tree.svg)
+![height:420](images/dom-tree.svg)
 
 > この **ツリー構造** を JavaScript から操作するのが **DOM操作** です
 
