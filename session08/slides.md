@@ -23,9 +23,6 @@ style: |
   table {
     font-size: 22px;
   }
-  div.mermaid {
-    all: unset;
-  }
 ---
 
 # 第8回: セキュリティの基礎 & 総仕上げ
@@ -110,16 +107,7 @@ TODOの追加・完了・削除ができる！ だが...
 
 ### 「入力は信用するな」（Never Trust User Input）
 
-<div class="mermaid">
-graph LR
-    A["ユーザーの入力"] --> B["入力値は必ず<br>「悪意がある」前提で扱う"]
-    B --> B1["フロントエンド（JS）での防御"]
-    B --> B2["バックエンド（Python）での防御"]
-    B --> B3["データベースでの防御"]
-    B1 --> C["安全に処理された<br>データ"]
-    B2 --> C
-    B3 --> C
-</div>
+![height:430](images/never-trust-input.svg)
 
 - テキスト入力欄に「普通のテキスト」が入るとは限らない
 - **HTMLタグ**、**スクリプト**、**SQL文**が入力される可能性がある
@@ -129,21 +117,7 @@ graph LR
 
 ## どこで何を守るか
 
-<div class="mermaid">
-graph LR
-    subgraph Client["ブラウザ（クライアント）"]
-        D1["防御1: XSS対策（textContent使用）"]
-        D2["防御2: 入力バリデーション（空文字等）"]
-        D3["防御3: エラーハンドリング"]
-    end
-    subgraph Server["サーバー（Python / FastAPI）"]
-        D4["防御4: バリデーション（Pydantic）"]
-        D5["防御5: SQLインジェクション対策"]
-        D6["防御6: エラーハンドリング（HTTPステータス）"]
-        D7["防御7: HTTPS（通信の暗号化）"]
-    end
-    Client -->|"HTTP通信"| Server
-</div>
+![height:430](images/defense-layers.svg)
 
 ---
 
@@ -190,17 +164,7 @@ TODOアプリに悪意のある入力をしてみましょう。
 
 ### XSS攻撃のフロー
 
-<div class="mermaid">
-sequenceDiagram
-    participant A as 攻撃者
-    participant S as サーバー
-    participant V as 被害者
-    A->>S: 1. 悪意ある入力を送信
-    Note over S: 2. そのまま保存
-    V->>S: ページを閲覧
-    S->>V: 3. ページを表示（悪意あるスクリプトがHTMLに含まれる）
-    Note over V: 4. スクリプトが実行される！<br>→ Cookie盗難<br>→ 画面改ざん<br>→ 偽フォーム表示
-</div>
+![height:520](images/xss-flow.svg)
 
 ---
 
@@ -351,16 +315,7 @@ li.appendChild(span);
 
 ### 攻撃のフロー
 
-<div class="mermaid">
-sequenceDiagram
-    participant A as 攻撃者
-    participant S as サーバー
-    participant D as データベース
-    A->>S: 1. 不正な入力を送信
-    Note over S: 2. 入力を直接SQL文に埋め込む<br>SQL文にDROP TABLEが混入
-    S->>D: 組み立てられたSQL文を実行
-    Note over D: 3. テーブルが削除される！
-</div>
+![height:440](images/sql-injection-flow.svg)
 
 ---
 
@@ -549,21 +504,7 @@ cursor.execute("INSERT INTO todos (title, done) VALUES (?, 0)", (todo.title,))
 
 ## クライアント側とサーバー側の両方で検証する理由
 
-<div class="mermaid">
-graph LR
-    A["ユーザー入力"] --> B
-    subgraph B["クライアント側バリデーション（JavaScript）"]
-        B1["UXのため（即座にフィードバック）"]
-        B2["開発者ツールで回避可能！"]
-        B3["信頼してはいけない"]
-    end
-    B -->|"HTTPリクエスト"| C
-    subgraph C["サーバー側バリデーション（Pydantic）"]
-        C1["最終防御ライン"]
-        C2["回避不可能"]
-        C3["ここで必ずチェックする"]
-    end
-</div>
+![height:360](images/validation.svg)
 
 攻撃者はブラウザのJavaScriptを無効にしたり、
 curlなどのツールでサーバーに直接リクエストを送ることができる。
@@ -686,21 +627,11 @@ class TodoCreate(BaseModel):
 
 ### エラーハンドリングなしの場合
 
-<div class="mermaid">
-graph LR
-    A1["ユーザー: 存在しない<br>TODOを削除しようとする"] --> B1["サーバー:<br>500 Internal Server Error"]
-    B1 --> C1["ブラウザ: 何が起きたか<br>分からない（無反応 or エラー画面）"]
-    C1 --> D1["ユーザー:<br>「アプリが壊れた？」と不安になる"]
-</div>
+![width:1100](images/no-error-handling.svg)
 
 ### エラーハンドリングありの場合
 
-<div class="mermaid">
-graph LR
-    A2["ユーザー: 存在しない<br>TODOを削除しようとする"] --> B2["サーバー:<br>404 Not Found"]
-    B2 --> C2["ブラウザ: 「指定されたTODOは<br>見つかりませんでした」と表示"]
-    C2 --> D2["ユーザー:<br>「あ、既に削除されたのか」と理解できる"]
-</div>
+![width:1100](images/with-error-handling.svg)
 
 ---
 
@@ -974,8 +905,3 @@ git push
 これらはすべてのWeb開発の**基礎**です。
 ここから先は、あなたの興味に合わせて自由に発展させてください。
 
-
-<script type="module">
-import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-mermaid.initialize({ startOnLoad: true, theme: 'dark' });
-</script>

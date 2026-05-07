@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 200" font-family="'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans CJK JP', sans-serif">
+  <defs>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f87171"/>
+    </marker>
+  </defs>
+
+  <rect x="10" y="50" width="280" height="100" rx="10" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+  <text x="150" y="88" text-anchor="middle" fill="#dbeafe" font-size="16" font-weight="bold">ユーザー: 存在しない</text>
+  <text x="150" y="116" text-anchor="middle" fill="#dbeafe" font-size="16" font-weight="bold">TODOを削除しようとする</text>
+
+  <line x1="295" y1="100" x2="345" y2="100" stroke="#f87171" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+
+  <rect x="350" y="50" width="280" height="100" rx="10" fill="#7f1d1d" stroke="#dc2626" stroke-width="2"/>
+  <text x="490" y="88" text-anchor="middle" fill="#fecaca" font-size="16" font-weight="bold">サーバー:</text>
+  <text x="490" y="116" text-anchor="middle" fill="#fecaca" font-size="16" font-weight="bold">500 Internal Server Error</text>
+
+  <line x1="635" y1="100" x2="685" y2="100" stroke="#f87171" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+
+  <rect x="690" y="50" width="300" height="100" rx="10" fill="#7f1d1d" stroke="#dc2626" stroke-width="2"/>
+  <text x="840" y="84" text-anchor="middle" fill="#fecaca" font-size="15" font-weight="bold">ブラウザ: 何が起きたか</text>
+  <text x="840" y="110" text-anchor="middle" fill="#fecaca" font-size="15" font-weight="bold">分からない</text>
+  <text x="840" y="135" text-anchor="middle" fill="#fecaca" font-size="14">（無反応 or エラー画面）</text>
+
+  <line x1="995" y1="100" x2="1045" y2="100" stroke="#f87171" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+
+  <rect x="1050" y="50" width="240" height="100" rx="10" fill="#7f1d1d" stroke="#dc2626" stroke-width="2"/>
+  <text x="1170" y="80" text-anchor="middle" fill="#fecaca" font-size="14" font-weight="bold">ユーザー:</text>
+  <text x="1170" y="105" text-anchor="middle" fill="#fecaca" font-size="14" font-weight="bold">「アプリが壊れた？」</text>
+  <text x="1170" y="130" text-anchor="middle" fill="#fecaca" font-size="14" font-weight="bold">と不安になる</text>
+</svg>
