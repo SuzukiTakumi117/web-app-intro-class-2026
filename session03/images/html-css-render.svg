@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 180" font-family="'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans CJK JP', sans-serif">
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/>
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <rect x="10" y="50" width="260" height="90" rx="10" fill="#155e75" stroke="#06b6d4" stroke-width="2"/>
+  <text x="140" y="102" text-anchor="middle" fill="#cffafe" font-size="22" font-weight="bold">サーバー</text>
+
+  <line x1="275" y1="95" x2="345" y2="95" stroke="#60a5fa" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+
+  <rect x="350" y="50" width="260" height="90" rx="10" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+  <text x="480" y="102" text-anchor="middle" fill="#cbd5e1" font-size="22" font-weight="bold">HTML + CSS</text>
+
+  <line x1="615" y1="95" x2="685" y2="95" stroke="#60a5fa" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+
+  <rect x="690" y="50" width="280" height="90" rx="10" fill="#1e3a8a" stroke="#3b82f6" stroke-width="3"/>
+  <text x="830" y="102" text-anchor="middle" fill="#dbeafe" font-size="22" font-weight="bold">ブラウザが解釈</text>
+
+  <line x1="975" y1="95" x2="1045" y2="95" stroke="#34d399" stroke-width="2.5" marker-end="url(#arrow-emerald)"/>
+
+  <rect x="1050" y="50" width="240" height="90" rx="10" fill="#064e3b" stroke="#10b981" stroke-width="2"/>
+  <text x="1170" y="102" text-anchor="middle" fill="#a7f3d0" font-size="22" font-weight="bold">画面に描画</text>
+</svg>
