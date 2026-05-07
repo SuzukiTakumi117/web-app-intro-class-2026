@@ -43,7 +43,7 @@ style: |
 
 ---
 
-![bg contain](../overview.png)
+![height:550](../share-images/overview.svg)
 
 ---
 
@@ -800,7 +800,7 @@ const response = await fetch("/todos");
 
 # 完成！TODOアプリの全体像
 
-![height:520](../overview.png)
+![height:550](../share-images/overview.svg)
 
 ---
 

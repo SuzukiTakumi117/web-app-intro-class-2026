@@ -46,7 +46,7 @@ JavaScriptを使って、TODOアプリに **動き** をつける
 
 ---
 
-![bg contain](../overview.png)
+![height:550](../share-images/overview.svg)
 
 ---
 

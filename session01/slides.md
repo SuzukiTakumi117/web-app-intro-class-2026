@@ -73,7 +73,7 @@ TODOアプリの機能:
 
 ## TODOアプリの全体アーキテクチャ
 
-![height:550](images/overview.svg)
+![height:550](../share-images/overview.svg)
 
 ---
 
@@ -263,7 +263,7 @@ Gitの用語:
 
 VS Codeの画面は大きく4つのエリアに分かれています。
 
-![height:550](vscode.svg)
+![height:550](images/vscode.svg)
 
 ---
 

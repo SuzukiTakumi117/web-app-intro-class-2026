@@ -43,7 +43,7 @@ HTMLでTODOアプリの構造（骨格）を作る
 
 ---
 
-![bg contain](../overview.png)
+![height:550](../share-images/overview.svg)
 
 ---
 

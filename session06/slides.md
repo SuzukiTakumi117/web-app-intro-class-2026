@@ -40,7 +40,7 @@ style: |
 
 ---
 
-![bg contain](../overview.png)
+![height:550](../share-images/overview.svg)
 
 ---
 

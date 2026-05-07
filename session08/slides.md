@@ -47,7 +47,7 @@ TODOの追加・完了・削除ができる！ だが...
 
 ---
 
-![bg contain](../overview.png)
+![height:550](../share-images/overview.svg)
 
 ---
 
@@ -875,7 +875,7 @@ function showError(message) {
 
 ## 完成したTODOアプリのアーキテクチャ
 
-![height:520](../overview.png)
+![height:550](../share-images/overview.svg)
 
 ---
 
@@ -896,7 +896,7 @@ function showError(message) {
 
 ## 「どこで何が動いているか」の理解
 
-![height:520](../overview.png)
+![height:550](../share-images/overview.svg)
 
 ---
 
