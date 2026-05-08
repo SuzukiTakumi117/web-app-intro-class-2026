@@ -855,8 +855,8 @@ session06/
 
 実習で穴埋め・実装を完了させたファイルをフォームから提出してください:
 
-1. `api_design.md` のGitHubのURL
+1. `api_design.md` のGitHubのURL（実習4で完成させた設計書）
    - 例: `https://github.com/ユーザー名/リポジトリ名/blob/main/session06/exercise/api_design.md`
 
-2. `main.py` のGitHubのURL
+2. `main.py` のGitHubのURL（実習5・6完了後の状態 = GET / POST / PUT / DELETE のCRUD全API実装済み）
    - 例: `https://github.com/ユーザー名/リポジトリ名/blob/main/session06/exercise/main.py`
