@@ -21,10 +21,28 @@ const todoList = document.getElementById("todo-list");
 // ============================================================
 // addTodo: 新しいTODOを配列に追加する
 //
-// 処理:
-//   1. titleが空文字なら何もしない（return）
-//   2. { title: title, done: false } を todos に push
-//   3. render() を呼んで画面を再描画
+let todos = [];
+const todoList = document.getElementById("todo-list");
+
+function addTodo(title) {
+  if (title === "") return; // 空文字なら何もしない
+  todos.push({
+    title: title,
+    done: false
+  });
+  render(); // 画面を再描画
+}
+
+function render() {
+  todoList.innerHTML = "";
+
+  todos.forEach((todo) => {
+    const li = document.createElement("li");
+    li.className = "todo-item";
+    li.textContent = todo.title;
+    todoList.appendChild(li);
+  });
+}
 // ============================================================
 function addTodo(title) {
   // ヒント:
