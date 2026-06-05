@@ -15,20 +15,22 @@
   [ ] 3: 自分のTODO
 """
 
-# ヒント: TODOリストを作成する
-#   todos = [
-#       {"id": 1, "title": "課題を出す", "done": False},
-#       {"id": 2, "title": "買い物する", "done": True},
-#       {"id": 3, "title": "自分のTODO", "done": False},
-#   ]
+# 1. TODOリスト（辞書のリスト）を定義する
+todos = [
+    {"id": 1, "title": "課題を出す", "done": False},
+    {"id": 2, "title": "買い物する", "done": True},
+    {"id": 3, "title": "自分のTODO", "done": False},
+]
 
 
-# ヒント: TODOを1件ずつ表示する関数を作成する
-#   def show_todos(todo_list):
-#       for todo in todo_list:
-#           status = "[x]" if todo["done"] else "[ ]"
-#           print(f'{status} {todo["id"]}: {todo["title"]}')
+# 2. show_todos 関数を実装する
+def show_todos(todo_list):
+    for todo in todo_list:
+        # doneがTrueなら"[x]"、Falseなら"[ ]"を代入する（三項演算子）
+        status = "[x]" if todo["done"] else "[ ]"
+        # f文字列（f-string）を使って指定のフォーマットで出力
+        print(f'{status} {todo["id"]}: {todo["title"]}')
 
 
-# ヒント: 関数を呼び出して動作を確認する
-#   show_todos(todos)
+# 3. show_todos(todos) を呼び出す
+show_todos(todos)
