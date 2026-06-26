@@ -1,40 +1,157 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TODO App</title>
-    <link rel="stylesheet" href="/style.css" />
-  </head>
-  <body>
-    <!-- ヘッダー -->
-    <header class="header">
-      <h1>TODO App</h1>
-    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODOアプリ - 完全完成版</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #f9f9f9;
+        }
+        h1 { color: #2563eb; text-align: center; }
+        #todo-form { display: flex; gap: 10px; margin-bottom: 20px; }
+        #todo-input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px; }
+        #todo-form button { background-color: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-size: 16px; cursor: pointer; }
+        #todo-form button:hover { background-color: #1d4ed8; }
+        #todo-list { list-style: none; padding: 0; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .todo-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #edf2f7; }
+        .todo-item:last-child { border-bottom: none; }
+        .todo-label { display: flex; align-items: center; gap: 10px; cursor: pointer; flex: 1; }
+        .todo-checkbox { width: 18px; height: 18px; cursor: pointer; }
+        .todo-title { font-size: 16px; color: #2d3748; }
+        .todo-item.done .todo-title { text-decoration: line-through; color: #a0aec0; }
+        .delete-button { background-color: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        .delete-button:hover { background-color: #dc2626; }
+    </style>
+</head>
+<body>
 
-    <!-- メインコンテンツ -->
-    <main class="todo-card">
-      <!-- TODO入力エリア -->
-      <form id="todo-form" class="input-area">
-        <input
-          type="text"
-          id="todo-input"
-          class="todo-input"
-          placeholder="新しいTODOを入力..."
-          autocomplete="off"
-        />
-        <button type="submit" class="todo-button">追加</button>
-      </form>
+    <h1>TODO リスト</h1>
+    
+    <form id="todo-form">
+        <input type="text" id="todo-input" placeholder="新しいTODOを入力..." required>
+        <button type="submit">追加</button>
+    </form>
 
-      <!-- TODOリスト（JavaScriptで動的に生成） -->
-      <ul id="todo-list" class="todo-list"></ul>
-    </main>
+    <ul id="todo-list"></ul>
 
-    <!-- フッター -->
-    <footer class="footer">
-      <p>&copy; 2026 TODO App</p>
-    </footer>
+    <script>
+        // --- 1. TODO一覧を取得して画面に表示する (GET) ---
+        async function loadTodos() {
+            try {
+                const response = await fetch("/todos");
+                const todos = await response.json();
+                renderTodos(todos);
+            } catch (error) {
+                console.error("TODO取得エラー:", error);
+            }
+        }
 
-    <script src="/app.js"></script>
-  </body>
+        // --- 2. 新しいTODOを追加する (POST) ---
+        async function addTodo() {
+            const input = document.getElementById("todo-input");
+            const title = input.value.trim();
+            if (!title) return;
+
+            try {
+                await fetch("/todos", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ title: title }),
+                });
+
+                input.value = ""; // 入力欄を空にする
+                await loadTodos(); // 一覧を再取得して画面を更新
+            } catch (error) {
+                console.error("TODO追加エラー:", error);
+            }
+        }
+
+        // --- 3. TODOの完了状態を切り替える (PUT) ---
+        async function toggleTodo(id, currentDone) {
+            try {
+                // バッククォートを使用してURLにIDを正しく埋め込む
+                await fetch(`/todos/${id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ done: !currentDone }), // 状態を反転
+                });
+
+                await loadTodos(); // 一覧を再取得して画面を更新
+            } catch (error) {
+                console.error("TODO更新エラー:", error);
+            }
+        }
+
+        // --- 4. TODOを削除する (DELETE) ---
+        async function deleteTodo(id) {
+            try {
+                // バッククォートを使用してURLにIDを正しく埋め込む
+                await fetch(`/todos/${id}`, {
+                    method: "DELETE",
+                });
+
+                await loadTodos(); // 一覧を再取得して画面を更新
+            } catch (error) {
+                console.error("TODO削除エラー:", error);
+            }
+        }
+
+        // --- 5. 取得したTODOリストを画面に組み立てる関数 ---
+        function renderTodos(todos) {
+            const todoList = document.getElementById("todo-list");
+            todoList.innerHTML = ""; // 一度リセット
+
+            todos.forEach(function (todo) {
+                const li = document.createElement("li");
+                li.className = "todo-item" + (todo.done ? " done" : "");
+
+                // ラベル部分（チェックボックスと文字を一体化）
+                const label = document.createElement("label");
+                label.className = "todo-label";
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.className = "todo-checkbox";
+                checkbox.checked = todo.done;
+                // チェックが変化したら現在のIDと状態を渡して関数を実行
+                checkbox.addEventListener("change", function () {
+                    toggleTodo(todo.id, todo.done);
+                });
+
+                const titleSpan = document.createElement("span");
+                titleSpan.className = "todo-title";
+                titleSpan.textContent = todo.title;
+
+                label.appendChild(checkbox);
+                label.appendChild(titleSpan);
+
+                // 削除ボタン
+                const deleteBtn = document.createElement("button");
+                deleteBtn.className = "delete-button";
+                deleteBtn.textContent = "削除";
+                deleteBtn.addEventListener("click", function () {
+                    deleteTodo(todo.id);
+                });
+
+                li.appendChild(label);
+                li.appendChild(deleteBtn);
+                todoList.appendChild(li);
+            });
+        }
+
+        // フォームの送信イベントを監視
+        document.getElementById("todo-form").addEventListener("submit", function (e) {
+            e.preventDefault(); // ページが勝手にリロードされるのを防ぐ
+            addTodo();
+        });
+
+        // ページを開いた瞬間にデータを読み込む
+        loadTodos();
+    </script>
+</body>
 </html>

@@ -3,7 +3,7 @@
 todosテーブルを作成し、サンプルデータを投入します。
 
 実行方法:
-  python init_db.py
+    python init_db.py
 """
 
 import sqlite3
@@ -25,11 +25,11 @@ def init_db():
         )
     """)
 
-    # サンプルデータを投入
+    # サンプルデータを投入（「牛乳を買う」はテストで追加するため、初期データからは除外）
     sample_todos = [
-        ("レポートを書く", False),
-        ("牛乳を買う", False),
-        ("部屋を掃除する", True),
+        ("レポートを書く", 0),
+        ("プログラミングの実習", 0),  # テストしやすいようにタスクを変更
+        ("部屋を掃除する", 1),
     ]
 
     conn.executemany("INSERT INTO todos (title, done) VALUES (?, ?)", sample_todos)

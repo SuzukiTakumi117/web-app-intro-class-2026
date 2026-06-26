@@ -42,17 +42,18 @@ async function addTodo() {
 }
 
 // -----------------------------------------------------
-// TODOの完了状態を切り替える（PUT）
+// TODOの完了状態を切り替える（PUT）— コメントを解除して実装
 // -----------------------------------------------------
 async function toggleTodo(id, currentDone) {
   try {
-    // ヒント: PUTリクエストを送信
-    //   await fetch(`/todos/${id}`, {
-    //     method: "PUT",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ done: !currentDone }),
-    //   });
+    // PUTリクエストを送信してサーバー（DB）の完了状態を反転させる
+    await fetch(`/todos/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ done: !currentDone }),
+    });
 
+    // 変更が終わったら最新の一覧を取得し直して画面を更新
     await loadTodos();
   } catch (error) {
     console.error("TODO更新エラー:", error);
@@ -60,15 +61,16 @@ async function toggleTodo(id, currentDone) {
 }
 
 // -----------------------------------------------------
-// TODOを削除する（DELETE）
+// TODOを削除する（DELETE）— コメントを解除して実装
 // -----------------------------------------------------
 async function deleteTodo(id) {
   try {
-    // ヒント: DELETEリクエストを送信
-    //   await fetch(`/todos/${id}`, {
-    //     method: "DELETE",
-    //   });
+    // DELETEリクエストを送信してサーバー（DB）からデータを削除
+    await fetch(`/todos/${id}`, {
+      method: "DELETE",
+    });
 
+    // 削除が終わったら最新の一覧を取得し直して画面を更新
     await loadTodos();
   } catch (error) {
     console.error("TODO削除エラー:", error);
